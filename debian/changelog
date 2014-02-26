@@ -1,0 +1,5 @@
+golang-columnize (0.1.0-1) unstable; urgency=low
+
+  * Initial release (Closes: #nnnn)
+
+ -- Kouhei Maeda <mkouhei@palmtb.net>  Thu, 27 Feb 2014 01:12:33 +0900
