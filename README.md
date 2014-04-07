@@ -4,6 +4,7 @@ Columnize
 Easy column-formatted output for golang
 
 [![Build Status](https://travis-ci.org/ryanuber/columnize.png)](https://travis-ci.org/ryanuber/columnize)
+[![Coverage Status](https://coveralls.io/repos/ryanuber/columnize/badge.png?branch=master)](https://coveralls.io/r/ryanuber/columnize?branch=master)
 
 Columnize is a really small Go package that makes building CLI's a little bit
 easier. In some CLI designs, you want to output a number similar items in a
@@ -26,7 +27,8 @@ func main() {
         "Bob | Male | 38",
         "Sally | Female | 26",
     }
-    fmt.Println(columnize.SimpleFormat(output))
+    result, _ := columnize.SimpleFormat(output)
+    fmt.Println(result)
 }
 ```
 
@@ -51,12 +53,30 @@ output := "Name | Gender | Age\n"
 output += "Bob | Male | 38\n"
 output += "Sally | Female | 26\n"
 
-fmt.Println(columnize.SimpleFormat(output))
+result, _ := columnize.SimpleFormat(output)
+fmt.Println(result)
 ```
 
-You can fine-tune the format of the output by calling the `Format` method. This
-lets you set spacing and delimiter selection.
+# Configuration
+
+Columnize is configured using a `Config`, which can be obtained by calling the
+`DefaultConfig()` method. You can then tweak the settings in the resulting
+`Config`:
+
+```
+config := columnize.DefaultConfig()
+config.Delim = "|"
+config.Glue = "  "
+```
+
+You can then pass the `Config` in using the `Format` method (signature below) to
+have text formatted to your liking.
+
+Usage
+=====
 
 ```go
-columnize.Format(input string, delim string, space string)
+SimpleFormat(intput interface{}) (string, error)
+
+Format(input interface{}, config *Config) (string, error)
 ```
